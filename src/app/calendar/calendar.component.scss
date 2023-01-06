@@ -1,0 +1,60 @@
+@import "~/src/vars.scss";
+
+.day {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  font-size: 1.25rem;
+}
+
+.disabled-day {
+  background-color: rgba($text-color, 0.5);
+  color: $light-color;
+}
+
+.active-day {
+  background-color: lightblue;
+  font-weight: 700;
+  color: $dark-color;
+  cursor: pointer;
+}
+
+.today {
+  background-color: $highlight-color;
+  color: $text-color;
+}
+
+.navigator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  gap: 3rem;
+  h2 {
+    text-align: center;
+    width: 33%;
+  }
+  button {
+    transition: all 0.5s ease;
+    color: $text-color;
+    :hover {
+      color: $highlight-color;
+    }
+  }
+}
+
+.day-grid {
+  display: grid;
+  width: 50%;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  > p {
+    width: 100%;
+    text-align: center;
+  }
+}

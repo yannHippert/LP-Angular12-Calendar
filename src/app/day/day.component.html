@@ -1,0 +1,29 @@
+<div class="day-component container">
+  <div class="navigator">
+    <button (click)="onPreviousDay()">
+      <i class="fa-solid fa-square-caret-left"></i>
+    </button>
+    <h2>{{ getDate() }}</h2>
+    <button (click)="onNextDay()">
+      <i class="fa-solid fa-square-caret-right"></i>
+    </button>
+  </div>
+
+  <div class="time-grid">
+    <p *ngFor="let hour of hours" class="time-slot">
+      {{ hour }}
+    </p>
+
+    <app-day-event *ngFor="let event of events" [event]="event">
+    </app-day-event>
+
+    <div
+      *ngIf="isCurrentDay()"
+      class="time-display"
+      [ngStyle]="{ top: getTimeOffset() }"
+      #currentTimeElement
+    >
+      <p>{{ currentTime }}</p>
+    </div>
+  </div>
+</div>

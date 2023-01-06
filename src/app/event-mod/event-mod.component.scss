@@ -1,0 +1,39 @@
+@import "~/src/vars.scss";
+@import "~/src/styles/switch.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.invalid {
+  color: red;
+  > label::before {
+    content: "*";
+  }
+  > label::after {
+    content: "(invalid)";
+    margin-left: 0.25rem;
+  }
+  input {
+    border: 1px solid red;
+    box-shadow: 0 0 0 3px rgba(red, 0.5);
+  }
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+  text-align: center;
+  input[type="date"],
+  input[type="time"] {
+    color: $dark-color;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}

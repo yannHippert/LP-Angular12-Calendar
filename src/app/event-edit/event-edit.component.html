@@ -1,0 +1,11 @@
+<div *ngIf="event" class="content-container container">
+  <h2>Edit event</h2>
+
+  <app-event-mod [event]="event"></app-event-mod>
+
+  <button class="btn btn-success" (click)="onUpdate()">Update</button>
+
+  <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+
+  <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+</div>

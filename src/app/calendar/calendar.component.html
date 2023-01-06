@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="navigator">
+    <button (click)="onPreviousMonth()">
+      <i class="fa-solid fa-square-caret-left"></i>
+    </button>
+    <h2>{{ getMonth() }} - {{ getYear() }}</h2>
+    <button (click)="onNextMonth()">
+      <i class="fa-solid fa-square-caret-right"></i>
+    </button>
+  </div>
+
+  <div class="flex justify-center align-center">
+    <div class="day-grid">
+      <!-- Weekdays -->
+      <p *ngFor="let weekday of getWeekdays()">
+        {{ weekday }}
+      </p>
+
+      <!-- Spacers from previous month -->
+      <div *ngFor="let spacer of spacers" class="day disabled-day">
+        <span>{{ spacer.date.getDate() }}</span>
+      </div>
+
+      <!-- Days from current month -->
+      <div
+        *ngFor="let day of days"
+        class="day active-day"
+        (click)="onDayClick(day)"
+        [ngClass]="{ today: day.isToday }"
+      >
+        <span>{{ day.date.getDate() }}</span>
+      </div>
+
+      <!-- Fillers from next month -->
+      <div *ngFor="let filler of fillers" class="day disabled-day">
+        <span>{{ filler.date.getDate() }}</span>
+      </div>
+    </div>
+  </div>
+</div>

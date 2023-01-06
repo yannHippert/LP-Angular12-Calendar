@@ -1,0 +1,18 @@
+<div class="event-list container">
+  <h2>Events</h2>
+  <div *ngFor="let day of days" class="day-list">
+    <p *ngIf="isToday(day.date)" class="day-date today" #todayElem>
+      Today {{ getLongDateString(day.date) }}
+    </p>
+    <p *ngIf="!isToday(day.date)" class="day-date">
+      {{ getLongDateString(day.date) }}
+    </p>
+    <div *ngIf="day.events.length === 0" class="event">
+      <p>No events</p>
+    </div>
+    <div *ngFor="let event of day.events" class="event">
+      <p>{{ getTime(event) }}</p>
+      <p>{{ event.name }}</p>
+    </div>
+  </div>
+</div>

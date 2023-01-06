@@ -1,0 +1,8 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~/src/vars.scss";
+
+body {
+  height: 100vh;
+  background-color: $dark-color;
+  color: $text-color;
+}

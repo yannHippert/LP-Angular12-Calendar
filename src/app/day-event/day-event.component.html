@@ -1,0 +1,12 @@
+<div
+  *ngIf="!event.isAllDay"
+  [ngStyle]="{ height: getHeight(), top: getTopOffset() }"
+  class="event"
+  (click)="onClick()"
+>
+  <p>{{ event.name }}</p>
+</div>
+
+<div *ngIf="event.isAllDay" class="event allday" (click)="onClick()">
+  <p><b>All-day:</b> {{ event.name }}</p>
+</div>
