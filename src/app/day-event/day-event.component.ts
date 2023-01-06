@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IEvent } from '../models/event.model';
 import { Router } from '@angular/router';
 import { getTimeString, isAllDay, isSameDay } from '../utils/date';
+import { variables } from '../utils/vars';
 
 @Component({
   selector: 'app-day-event',
@@ -39,6 +40,13 @@ export class DayEventComponent implements OnInit {
    */
   getHeight(): string {
     return this.getDuration() + 'px';
+  }
+
+  /**
+   * @returns The color of the event with a default value if the event has no color
+   */
+  getBgColor(): string {
+    return this.event.color || variables.color.highlight;
   }
 
   /**

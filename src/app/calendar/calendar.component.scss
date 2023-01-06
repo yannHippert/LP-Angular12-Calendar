@@ -65,10 +65,13 @@
 
 .day-grid {
   display: grid;
-  width: 50%;
+  width: min(100%, max(50%, 640px));
   grid-template-columns: repeat(7, 1fr);
   gap: 0.5rem;
   > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     width: 100%;
     text-align: center;
   }

@@ -6,6 +6,7 @@ export interface IBaseEvent {
   endDate: firebase.firestore.Timestamp;
   duration?: number;
   isAllDay?: boolean;
+  color?: string;
 }
 
 export interface IEvent extends IBaseEvent {

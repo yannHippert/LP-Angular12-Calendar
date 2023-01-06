@@ -6,6 +6,7 @@ import {
   getTimeString,
   isAllDay,
 } from '../utils/date';
+import { variables } from '../utils/vars';
 
 @Component({
   selector: 'app-event-mod',
@@ -25,6 +26,7 @@ export class EventModComponent implements OnInit {
    * Handles the initial setup of the component.
    */
   ngOnInit(): void {
+    if (!this.event.color) this.event.color = variables.color.highlight;
     const startDate = this.event.startDate.toDate();
     const endDate = this.event.endDate.toDate();
     this.updateDateStrings(startDate, endDate);

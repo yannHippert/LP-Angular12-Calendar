@@ -1,6 +1,10 @@
 <div
   *ngIf="!event.isAllDay"
-  [ngStyle]="{ height: getHeight(), top: getTopOffset() }"
+  [ngStyle]="{
+    height: getHeight(),
+    top: getTopOffset()
+  }"
+  [style.--bg-color]="getBgColor()"
   class="event"
   (click)="onClick()"
 >

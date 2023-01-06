@@ -16,7 +16,7 @@
   font-weight: 700;
   gap: 3rem;
   > div {
-    width: min(100%, min(33%, 500px));
+    width: min(100%, max(33%, 500px));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,7 +37,7 @@
 
 .time-grid {
   margin: 0 auto;
-  width: 50%;
+  width: min(90%, max(40%, 640px));
   height: 100%;
   overflow-y: auto;
   position: relative;

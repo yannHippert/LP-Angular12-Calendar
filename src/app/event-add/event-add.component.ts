@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IBaseEvent } from '../models/event.model';
 import { EventService } from '../services/event/event.service';
 import { getDateString, getTimestamp } from '../utils/date';
+import { variables } from '../utils/vars';
 
 @Component({
   selector: 'app-event-add',
@@ -29,6 +30,7 @@ export class EventAddComponent implements OnInit {
       name: 'New Event',
       startDate: getTimestamp(startDate),
       endDate: getTimestamp(endDate),
+      color: variables.color.highlight,
     };
   }
 
