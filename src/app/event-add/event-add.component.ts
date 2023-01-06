@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBaseEvent } from '../models/day-event';
+import { IBaseEvent } from '../models/event.model';
 import { EventService } from '../services/event/event.service';
-import { getDateString, getTimestamp, getTimeString } from '../utils/date';
+import { getDateString, getTimestamp } from '../utils/date';
 
 @Component({
   selector: 'app-event-add',
@@ -14,6 +14,10 @@ export class EventAddComponent implements OnInit {
 
   constructor(private EventService: EventService, private router: Router) {}
 
+  /**
+   * Handles the initial setup of the component.
+   * Creates a new/empty event.
+   */
   ngOnInit(): void {
     const startDate = new Date();
     const endDate = new Date();
@@ -28,6 +32,10 @@ export class EventAddComponent implements OnInit {
     };
   }
 
+  /**
+   * Creates the new event and refirects the user
+   * to the page of the day of the event.
+   */
   onCreate() {
     if (this.event.name.trim().length > 0)
       this.EventService.add(this.event).subscribe(() => {
@@ -37,6 +45,10 @@ export class EventAddComponent implements OnInit {
       });
   }
 
+  /**
+   * In case, the user cancels the creation, redirects the user to
+   * the calendar page.
+   */
   onCancel() {
     this.router.navigate(['calendar']);
   }

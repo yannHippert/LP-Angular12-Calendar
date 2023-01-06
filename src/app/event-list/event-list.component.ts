@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IEvent } from '../models/day-event';
+import { IEvent } from '../models/event.model';
 import { IDay } from '../models/day.model';
 import { EventService } from '../services/event/event.service';
 import {
@@ -21,6 +21,10 @@ export class EventListComponent implements OnInit {
 
   constructor(private EventService: EventService) {}
 
+  /**
+   * Handles the initial setup of the component,
+   * which consists of getting all the events and regrouping the by day.
+   */
   ngOnInit(): void {
     this.EventService.getAll().subscribe((events: Array<IEvent>) => {
       let hasToday = false;
@@ -43,6 +47,8 @@ export class EventListComponent implements OnInit {
       });
       if (day !== undefined) this.days.push(day);
 
+      // If today has no event, creates a day for today anyway and sorts
+      // the days again.
       if (!hasToday) {
         this.days.push({
           date: new Date(),
@@ -56,20 +62,37 @@ export class EventListComponent implements OnInit {
     });
   }
 
+  /**
+   * Attempt to scroll to the current day.
+   * Not working...
+   */
   ngAfterViewInit() {
     console.log(this.todayElemRef);
     //this.todayElem.nativeElement.scrollIntoView();
   }
 
+  /**
+   * @param date The date to be formatted
+   * @returns The formatted string of the date.
+   */
   getLongDateString(date: Date): string {
     return getLongDateString(date);
   }
 
+  /**
+   * @param date The date to be checked
+   * @returns A boolean indicating if the date is today.
+   */
   isToday(date: Date): boolean {
     return isToday(date);
   }
 
-  getTime(event: IEvent): string {
+  /**
+   * Creates the formatted string of the timespan of the event.
+   * @param event The event of which to get the timespan.
+   * @returns The formatted timespan.
+   */
+  getTimeSpan(event: IEvent): string {
     return `${getTimeString(event.startDate.toDate())} - ${getTimeString(
       event.endDate.toDate()
     )}`;

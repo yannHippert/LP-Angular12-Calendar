@@ -1,4 +1,4 @@
-import { IEvent } from './day-event';
+import { IEvent } from './event.model';
 
 export interface IDay {
   date: Date;

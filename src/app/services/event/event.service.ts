@@ -7,7 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { IBaseEvent, IEvent } from 'src/app/models/day-event';
+import { IBaseEvent, IEvent } from 'src/app/models/event.model';
 import { getNextDay, getPreviousDay, getTimestamp } from 'src/app/utils/date';
 
 @Injectable({
@@ -119,7 +119,8 @@ export class EventService {
         .doc(id)
         .get()
         .subscribe((res) => {
-          obs.next({ id: res.id, ...res.data() });
+          if (res.data() === undefined) obs.error();
+          else obs.next({ id, ...res.data() });
         });
     });
   }

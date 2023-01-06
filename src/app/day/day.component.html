@@ -3,7 +3,10 @@
     <button (click)="onPreviousDay()">
       <i class="fa-solid fa-square-caret-left"></i>
     </button>
-    <h2>{{ getDate() }}</h2>
+    <div>
+      <h2>{{ getDate() }}</h2>
+      <p>{{ events.length }} events</p>
+    </div>
     <button (click)="onNextDay()">
       <i class="fa-solid fa-square-caret-right"></i>
     </button>
@@ -18,7 +21,6 @@
     </app-day-event>
 
     <div
-      *ngIf="isCurrentDay()"
       class="time-display"
       [ngStyle]="{ top: getTimeOffset() }"
       #currentTimeElement

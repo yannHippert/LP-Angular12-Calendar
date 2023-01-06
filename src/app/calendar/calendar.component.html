@@ -29,6 +29,9 @@
         [ngClass]="{ today: day.isToday }"
       >
         <span>{{ day.date.getDate() }}</span>
+        <span *ngIf="day.events.length !== 0" class="event-counter">
+          {{ day.events.length }}
+        </span>
       </div>
 
       <!-- Fillers from next month -->

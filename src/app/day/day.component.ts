@@ -1,9 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IEvent } from '../models/day-event';
+import { IEvent } from '../models/event.model';
 import { EventService } from '../services/event/event.service';
 import { interval } from 'rxjs';
-import { getDateString, isToday } from '../utils/date';
+import {
+  getDateString,
+  getTimeSlots,
+  getTimeString,
+  isToday,
+} from '../utils/date';
 
 @Component({
   selector: 'app-day',
@@ -25,15 +30,14 @@ export class DayComponent implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Handles the initial creation of the component.
+   * Creates the background, handles the parameter (which is the date),
+   * and the current-time indicator.
+   */
   ngOnInit(): void {
-    for (let i = 0; i < 25; i++) {
-      this.hours.push(
-        i.toLocaleString('en-US', {
-          minimumIntegerDigits: 2,
-          useGrouping: false,
-        }) + ':00'
-      );
-    }
+    this.hours = getTimeSlots();
+
     this.route.params.subscribe((params) => {
       this.date = params.date === 'today' ? new Date() : new Date(params.date);
       if (isNaN(this.date.getTime()))
@@ -49,14 +53,23 @@ export class DayComponent implements OnInit {
     });
   }
 
+  /**
+   * Scroll to the cuurent-time indicator once the component has loaded.
+   */
   ngAfterViewInit() {
     this.currentTimeRef.nativeElement.scrollIntoView();
   }
 
-  getDate = () => {
+  /**
+   * @returns The formatted date.
+   */
+  getDate = (): string => {
     return this.date.toLocaleDateString('de-De');
   };
 
+  /**
+   * Handles the change to the previous day.
+   */
   onPreviousDay = () => {
     const previousDay = new Date(
       this.date.getFullYear(),
@@ -66,6 +79,9 @@ export class DayComponent implements OnInit {
     this.router.navigate(['day/' + getDateString(previousDay)]);
   };
 
+  /**
+   * Handles the change to the next day.
+   */
   onNextDay = () => {
     const nextDay = new Date(
       this.date.getFullYear(),
@@ -75,28 +91,19 @@ export class DayComponent implements OnInit {
     this.router.navigate(['day/' + getDateString(nextDay)]);
   };
 
-  isCurrentDay(): boolean {
-    return true;
-    return isToday(this.date);
-  }
-
+  /**
+   * @returns A string consiting of the amount of pixels,
+   *  the current-time indicator has to be from the top.
+   */
   getTimeOffset(): string {
     const now = new Date();
     return now.getHours() * 60 + now.getMinutes() + 'px';
   }
 
+  /**
+   * @returns A string of the current time.
+   */
   getCurrentTime(): string {
-    const now = new Date();
-    return (
-      now.getHours().toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false,
-      }) +
-      ':' +
-      now.getMinutes().toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false,
-      })
-    );
+    return getTimeString(new Date());
   }
 }

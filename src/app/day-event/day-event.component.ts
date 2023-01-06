@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IEvent } from '../models/day-event';
+import { IEvent } from '../models/event.model';
 import { Router } from '@angular/router';
-import { getTimeString, isSameDay } from '../utils/date';
+import { getTimeString, isAllDay, isSameDay } from '../utils/date';
 
 @Component({
   selector: 'app-day-event',
@@ -18,30 +18,40 @@ export class DayEventComponent implements OnInit {
     this.event.isAllDay = this.isAllDay();
   }
 
+  /**
+   * @returns A string consiting of the amount of pixels,
+   *  the event has to be from the top.
+   */
   getTopOffset(): string {
     const date = this.event.startDate.toDate();
     return date.getHours() * 60 + date.getMinutes() + 12 + 'px';
   }
 
+  /**
+   * @returns The duration of the event in minutes
+   */
   getDuration(): number {
     return (this.event.endDate.seconds - this.event.startDate.seconds) / 60;
   }
 
+  /**
+   * @returns The hight of the event, relative to its duration, in pixels.
+   */
   getHeight(): string {
     return this.getDuration() + 'px';
   }
 
+  /**
+   * Handles the navigation to the edit page.
+   */
   onClick(): void {
     this.router.navigate(['event/edit/' + this.event.id]);
   }
 
+  /**
+   * @returns Boolean indicating if the event is all-day long.
+   */
   isAllDay(): boolean {
-    const startDate = this.event.startDate.toDate();
-    const endDate = this.event.endDate.toDate();
-    return (
-      isSameDay(startDate, endDate) &&
-      getTimeString(startDate) === '00:00' &&
-      getTimeString(endDate) === '23:59'
-    );
+    return isAllDay(this.event.startDate.toDate(), this.event.endDate.toDate());
   }
 }

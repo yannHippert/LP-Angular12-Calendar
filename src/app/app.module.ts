@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
@@ -17,13 +16,11 @@ import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
 import { EventModComponent } from './event-mod/event-mod.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CalendarComponent,
     DayComponent,
     DayEventComponent,
@@ -31,7 +28,6 @@ import { EventModComponent } from './event-mod/event-mod.component';
     EventAddComponent,
     EventListComponent,
     NavbarComponent,
-    FooterComponent,
     EventModComponent,
   ],
   imports: [

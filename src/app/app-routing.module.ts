@@ -5,15 +5,10 @@ import { DayComponent } from './day/day.component';
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventListComponent } from './event-list/event-list.component';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'calendar',
     component: CalendarComponent,
   },
   {
